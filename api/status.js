@@ -1,6 +1,5 @@
-// api/status.js
 export default function handler(req, res) {
-  // Set your local timezone (Default: Asia/Jakarta - WIB UTC+7)
+  // Configurable timezone via query param (Default: Asia/Jakarta - WIB UTC+7)
   const timeZone = req.query.timezone || 'Asia/Jakarta';
   const tzLabel = req.query.tz_label || 'WIB';
 
@@ -19,12 +18,15 @@ export default function handler(req, res) {
     10
   );
 
-  // Sleep time between 22:00 (10 PM) and 06:00 (6 AM)
+  // Sleep time: 22:00 (10 PM) to 06:00 (6 AM)
   const isSleeping = hour >= 22 || hour < 6;
 
-  // Prevent aggressive caching so visitors see real-time updates
+  // Set headers directly in code (No vercel.json needed)
   res.setHeader('Content-Type', 'image/svg+xml');
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
 
   if (isSleeping) {
     // ----------------- SLEEP MODE SVG (22:00 - 06:00) -----------------
