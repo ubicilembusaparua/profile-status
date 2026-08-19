@@ -1,0 +1,9 @@
+﻿{
+  "name": "github-profile-status",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Dynamic animated sleep/work status SVG for GitHub Profile",
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}
